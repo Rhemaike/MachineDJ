@@ -91,6 +91,7 @@ def getfeat_df(playlist_name):
         feat_dic = feat
         feat_dic["name"] = name
         songdf = songdf.append(feat_dic,ignore_index=True)
+    print("# songs in playlist: ",len(items))
 
     return songdf
             
@@ -127,19 +128,28 @@ if __name__ == "__main__":
     playlist_name = "Neural Beats - Study and Focus"
     cooljams = "1dku1CDmjYpuXW9m2Zs7ni"
     NN = "7pYSJlHb5THXjtZ1JjHNXX"
+    NN2 = "3ZEIkiOjWSTeNNhix1oGqN"
+    NN3 = "6gSTSn9UEj4eV6rENrAl13"
+    NN4 = "0QlAmiUtN8AL7M9pjgjvjt"
+    NN5 = "2y306QxWv1D8skpMxhogtr"
+    NN6 = "571OKYByH4yHYINUbO1M8j"
+    NN7 = "2o15TkekA7VuMCcTqHsook"
+    NN8 = "3dQioa3CefJs5TD2f6zcHq"
+    NN9 = "0GMHKKpNzfwrfIRQagPKHv"
+    NN10 = "7fZTtl038X2mnFUTxa06BO"
     test = "71UwSzImcFePNOHMAh3v4h"
     coolvibes= "5M6G2d6F4LIobYnh8Gcjpp"
 
-    playlist_ids = [NN, coolvibes, test, cooljams ]
+    playlist_ids = [NN, NN2, NN3, NN4, NN5, NN6, NN7, NN8, NN9, NN10]
     dfs = []
     for play_id in playlist_ids:
         dfs.append(getfeat_df(play_id))
     
     song_df = pd.concat(dfs)
     
-    song_df.to_excel("Song_data_2.xlsx") 
-    new_song_df = song_df[["name", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
-    new_song_df.to_excel("Song_data_2_less.xlsx",index=False) 
+    song_df.to_excel("Song_Feature_Data_set.xlsx") 
+    new_song_df = song_df[["name", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness", "time_signature", "duration_ms"]].copy()
+    new_song_df.to_excel("Song_Feature_Data_set_less.xlsx",index=False) 
     
 
     # # Find the tracks in playlist
