@@ -66,6 +66,35 @@ def get_key(name):
         return None,None,None
 
 
+def getfeat_df(playlist_name):
+    # Create df with features:
+    features = ["key",  "mode",  "time_signature", "acousticness", "danceability", "energy", 
+    "instrumentalness", "liveness","loudness", "speechiness", "valence", "tempo","name"]
+    songdf = pd.DataFrame()
+
+    # Find the tracks in playlist
+    playlist = spotify.playlist(playlist_name)
+    items = playlist["tracks"]["items"]
+    song_ids = []
+    song_names = []
+    for item in items:
+        name = item["track"]["name"]
+        songid  = item["track"]["id"]
+        # print("Name is song: {}".format(name))
+        # print("id is: {}".format(songid))
+        song_ids.append(songid)
+        song_names.append(name)
+
+    feat_list = spotify.audio_features(song_ids)
+
+    for feat,name in zip(feat_list,song_names):
+        feat_dic = feat
+        feat_dic["name"] = name
+        songdf = songdf.append(feat_dic,ignore_index=True)
+
+    return songdf
+            
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         name = ' '.join(sys.argv[1:])
@@ -93,74 +122,49 @@ if __name__ == "__main__":
 
     # songdf.to_excel("output.xlsx") 
 
+    #============================ CREATE DF WITH SONGS FROM PLAYLIST AND FEATURES ==============================
+
     playlist_name = "Neural Beats - Study and Focus"
-    # playlist = spotify.search(q="playlist:"+playlist_name,type="playlist")
-    # name = "creep"
-    # song = spotify.search(q="track:"+name, type='track') 
-    # print(playlist)
-    # print(song)
     cooljams = "1dku1CDmjYpuXW9m2Zs7ni"
     NN = "7pYSJlHb5THXjtZ1JjHNXX"
     test = "71UwSzImcFePNOHMAh3v4h"
     coolvibes= "5M6G2d6F4LIobYnh8Gcjpp"
-    playlist = spotify.playlist(coolvibes)
 
-    # print(playlist)
+    playlist_ids = [NN, coolvibes, test, cooljams ]
+    dfs = []
+    for play_id in playlist_ids:
+        dfs.append(getfeat_df(play_id))
+    
+    song_df = pd.concat(dfs)
+    
+    song_df.to_excel("Song_data_2.xlsx") 
+    new_song_df = song_df[["name", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
+    new_song_df.to_excel("Song_data_2_less.xlsx",index=False) 
+    
 
-    # for key,item in playlist.items():
+    # # Find the tracks in playlist
+    # items = playlist["tracks"]["items"]
+    # song_id = [0]* len(items)
+    # for item in items:
+    #     print("Name is song: {}".format(item["track"]["name"]))
+    #     print("id is: {}".format(item["track"]["id"]))
+    #     song_id = item["track"]["id"]
+
+    # song = spotify.track(song_id)
+    # # print(song)
+    # aud = spotify.audio_analysis(song_id)
+    # track = aud['track']
+    # ft = spotify.audio_features(song_id)
+    # f1 = ft[0]
+    # # print(track)
+    # features = ["key",  "mode",  "time_signature", "acousticness", "danceability", "energy", 
+    # "instrumentalness", "liveness","loudness", "speechiness", "valence", "tempo"]
+    # for key, item in f1.items():
     #     print(key)
-    #     if key=="tracks":
-    #         for key2,item2 in item.items():
-    #             print(key2)
-    #             if key2 == "items":
-    #                 print("---------------------------------------------")
-    #                 for stuff in item2:
-    #                     for key3,item3 in stuff.items():
-    #                         print("**********************")
-    #                         print(key3)
-    #                         if key3 == "track":
-    #                             print("+++++++++++++++++++++")
-    #                             for key4,item4 in item3.items():
-    #                                 print(key4)
-    #                                 if key4 == "name":
-    #                                     print("NAME IS {}".format(item4))
-    #                             print("+++++++++++++++++++++")
-    #                         print("**********************")
-    #                         # print("---------------------------------------------")
-    #                         # for key4,item4 in item3.items():
-    #                         #     print(key4)
-    #                         # print("---------------------------------------------")
+    # for feature in features:
+    #     print(f1[feature])
 
-    #                 # print(item2)
-    #                 print("There are {} tracks".format(len(item2))) 
-    #                 # print(item2[0])
-                        
 
-    #                 print("---------------------------------------------")
-    #         print()
-
-    items = playlist["tracks"]["items"]
-    for item in items:
-        print("Name is song: {}".format(item["track"]["name"]))
-        print("id is: {}".format(item["track"]["id"]))
-        song_id = item["track"]["id"]
-
-    song = spotify.track(song_id)
-    # print(song)
-    aud = spotify.audio_analysis(song_id)
-    track = aud['track']
-    ft = spotify.audio_features(song_id)
-    f1 = ft[0]
-    # print(track)
-    features = ["key",  "mode",  "time_signature", "acousticness", "danceability", "energy", 
-    "instrumentalness", "liveness","loudness", "speechiness", "valence", "tempo"]
-    for key, item in f1.items():
-        print(key)
-    for feature in features:
-        print(f1[feature])
-
-    # tracks = spotify.playlist_tracks(NN)
-    # print(len(tracks["items"]))
 
         
 
