@@ -94,7 +94,31 @@ def getfeat_df(playlist_name):
     print("# songs in playlist: ",len(items))
 
     return songdf
-            
+
+
+def standardize(row, min,max,avg):
+    range  = max - min
+    return (row - avg) / range
+
+def minmax_normalize(item, min, max):
+    range  = max - min
+    return (item - min) / range
+
+def minmax_dfnorm(df, features):
+    for feat in features:
+        minimum = df[feat].min()
+        maximum = df[feat].max()
+        df[feat] = df[feat].apply(minmax_normalize, args=[minimum,maximum])
+    return df
+
+def stad_dfnorm(df, features):
+    for feat in features:
+        minimum = df[feat].min()
+        maximum = df[feat].max()
+        avg = df[feat].mean()
+        df[feat] = df[feat].apply(standardize, args=[minimum,maximum,avg])
+    
+    return df
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -140,40 +164,41 @@ if __name__ == "__main__":
     test = "71UwSzImcFePNOHMAh3v4h"
     coolvibes= "5M6G2d6F4LIobYnh8Gcjpp"
 
+    P11 = "3TDgf9mn73lqWycaFnJsGF"
+    P12 = "1nVtsQyNYOcC608sNkMMHC"
+    P13 = "3ZEIkiOjWSTeNNhix1oGqN"
+
+    P21 = "6gSTSn9UEj4eV6rENrAl13"
+    P22 = "0QlAmiUtN8AL7M9pjgjvjt"
+    P23 = "1x1uzuTgvx8TuiHrUewef5"
+
+    P31 = "3dQioa3CefJs5TD2f6zcHq"
+    P32 = "2lGtVufyFMowWQRZhxJHjF"
+    P33 = "5oml6NZHKt7ht6iM3mQrj3"
+
+    P41 = "0GMHKKpNzfwrfIRQagPKHv"
+    P42 = "7fZTtl038X2mnFUTxa06BO"
+    P43 = "2y306QxWv1D8skpMxhogtr"
+
     playlist_ids = [NN, NN2, NN3, NN4, NN5, NN6, NN7, NN8, NN9, NN10]
+    playlist_ids2 = [P11, P12, P13, P21, P22, P23, P31, P32, P33, P41, P42, P43]
     dfs = []
-    for play_id in playlist_ids:
+    for play_id in playlist_ids2:
         dfs.append(getfeat_df(play_id))
     
     song_df = pd.concat(dfs)
     
-    song_df.to_excel("Song_Feature_Data_set.xlsx") 
-    new_song_df = song_df[["name", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness", "time_signature", "duration_ms"]].copy()
-    new_song_df.to_excel("Song_Feature_Data_set_less.xlsx",index=False) 
+    song_df.to_excel("Song_Feature_Data_set_2.xlsx") 
+    new_song_df = song_df[["name", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
+    new_song_df.to_excel("Song_Feature_Data_set_less_2.xlsx",index=False) 
+
+    # Normalize features
+    normfeat = ["key","loudness", "tempo"]
+    normdf_minmax = new_song_df
+    normdf_minmax = minmax_dfnorm(normdf_minmax, normfeat)
     
-
-    # # Find the tracks in playlist
-    # items = playlist["tracks"]["items"]
-    # song_id = [0]* len(items)
-    # for item in items:
-    #     print("Name is song: {}".format(item["track"]["name"]))
-    #     print("id is: {}".format(item["track"]["id"]))
-    #     song_id = item["track"]["id"]
-
-    # song = spotify.track(song_id)
-    # # print(song)
-    # aud = spotify.audio_analysis(song_id)
-    # track = aud['track']
-    # ft = spotify.audio_features(song_id)
-    # f1 = ft[0]
-    # # print(track)
-    # features = ["key",  "mode",  "time_signature", "acousticness", "danceability", "energy", 
-    # "instrumentalness", "liveness","loudness", "speechiness", "valence", "tempo"]
-    # for key, item in f1.items():
-    #     print(key)
-    # for feature in features:
-    #     print(f1[feature])
-
+    normdf_minmax.to_excel("Song_Feature_Data2_Norm_minmax.xlsx",index=False) 
+ 
 
 
         
