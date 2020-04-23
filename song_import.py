@@ -167,21 +167,29 @@ if __name__ == "__main__":
     P11 = "3TDgf9mn73lqWycaFnJsGF"
     P12 = "1nVtsQyNYOcC608sNkMMHC"
     P13 = "3ZEIkiOjWSTeNNhix1oGqN"
+    P14 = "1RegbWk6Uj2lQYfaLDnZzp"
+    P15 = "56mKPrUGL6RwLQ2GoEyVnM"
 
     P21 = "6gSTSn9UEj4eV6rENrAl13"
     P22 = "0QlAmiUtN8AL7M9pjgjvjt"
     P23 = "1x1uzuTgvx8TuiHrUewef5"
+    P24 = "54fJ9GHAMGkmH3EW2T7Emm"
+    P25 = "3SzMrSo8NK1SMnv1mPy6Rx"
 
     P31 = "3dQioa3CefJs5TD2f6zcHq"
     P32 = "2lGtVufyFMowWQRZhxJHjF"
     P33 = "5oml6NZHKt7ht6iM3mQrj3"
+    P34 = "7aBu2zQxTdzj0MfNqoQCwv"
+    P35 = "2sQ2NlMNWlAZ6layISaOLK"
 
     P41 = "0GMHKKpNzfwrfIRQagPKHv"
     P42 = "7fZTtl038X2mnFUTxa06BO"
     P43 = "2y306QxWv1D8skpMxhogtr"
+    P44 = "7Gve87oAvrTLSxe62IlnPB"
+    P45 = "1NwUJ3JFrmVNx5tTQoyld1"
 
     playlist_ids = [NN, NN2, NN3, NN4, NN5, NN6, NN7, NN8, NN9, NN10]
-    playlist_ids2 = [P11, P12, P13, P21, P22, P23, P31, P32, P33, P41, P42, P43]
+    playlist_ids2 = [P11, P12, P13, P14, P15, P21, P22, P23, P24, P25, P31, P32, P33, P34, P35, P41, P42, P43, P44, P45]
     dfs = []
     for play_id in playlist_ids2:
         dfs.append(getfeat_df(play_id))
@@ -197,7 +205,7 @@ if __name__ == "__main__":
     normdf_minmax = new_song_df
     normdf_minmax = minmax_dfnorm(normdf_minmax, normfeat)
     
-    normdf_minmax.to_excel("Song_Feature_Data2_Norm_minmax.xlsx",index=False) 
+    normdf_minmax.to_excel("Song_Feat_minmax_2000.xlsx",index=False) 
  
 
 
