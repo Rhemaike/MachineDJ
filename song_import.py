@@ -1,11 +1,10 @@
 #Author: Rhema Ike
-
-
 # imports
 import spotipy
 import sys
 from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
+import os
 
 from exform import Song
 
@@ -77,19 +76,23 @@ def getfeat_df(playlist_name):
     items = playlist["tracks"]["items"]
     song_ids = []
     song_names = []
+    song_artists = []
     for item in items:
         name = item["track"]["name"]
         songid  = item["track"]["id"]
+        artist = item["track"]["artists"][0]["name"]
         # print("Name is song: {}".format(name))
         # print("id is: {}".format(songid))
         song_ids.append(songid)
         song_names.append(name)
+        song_artists.append(artist)
 
     feat_list = spotify.audio_features(song_ids)
 
-    for feat,name in zip(feat_list,song_names):
+    for feat,name,artist in zip(feat_list,song_names,song_artists):
         feat_dic = feat
         feat_dic["name"] = name
+        feat_dic["artist"] = artist
         songdf = songdf.append(feat_dic,ignore_index=True)
     print("# songs in playlist: ",len(items))
 
@@ -101,8 +104,14 @@ def standardize(row, min,max,avg):
     return (row - avg) / range
 
 def minmax_normalize(item, min, max):
-    range  = max - min
-    return (item - min) / range
+    try:
+        range  = max - min
+        return (item - min) / range
+    except Exception as e:
+        print(e)
+        print("min max item:",min,max,item)
+        exit(3)
+
 
 def minmax_dfnorm(df, features):
     for feat in features:
@@ -169,43 +178,77 @@ if __name__ == "__main__":
     P13 = "3ZEIkiOjWSTeNNhix1oGqN"
     P14 = "1RegbWk6Uj2lQYfaLDnZzp"
     P15 = "56mKPrUGL6RwLQ2GoEyVnM"
+    P16 = "2eXsFfIUzVRepYmJ49OTrs"
+    P17 = "0R1zMACNQ9Nala5T5ViJl1"
+    P18 = "01Pd2HVvXYOJUC7bIdYdF1"
+    P19 = "0vf2Np2mY5wVLAfWFP67XG"
+    P110 = "1CPEKrwbhSTAQ2PhA7GGoZ"
+
 
     P21 = "6gSTSn9UEj4eV6rENrAl13"
     P22 = "0QlAmiUtN8AL7M9pjgjvjt"
     P23 = "1x1uzuTgvx8TuiHrUewef5"
     P24 = "54fJ9GHAMGkmH3EW2T7Emm"
     P25 = "3SzMrSo8NK1SMnv1mPy6Rx"
+    P26 = "0EFaxFWwWWx35NoicVvUIj"
+    P27 = "75ACiTPkvbcq4eWYJ33ngr"
+    P28 = "1dv03ubPD72hFaJbUzMM8G"
+    P29 = "4egO459iQdhUotMcPg15cQ"
+    P210 = "1lsnPKl6gDoN0H72sN4MVG"
 
     P31 = "3dQioa3CefJs5TD2f6zcHq"
     P32 = "2lGtVufyFMowWQRZhxJHjF"
     P33 = "5oml6NZHKt7ht6iM3mQrj3"
     P34 = "7aBu2zQxTdzj0MfNqoQCwv"
     P35 = "2sQ2NlMNWlAZ6layISaOLK"
+    P36 = "5c0JRlRcrcVEqOr0aQkHod"
+    P37 = "1VleJtMH7tAtsi2sNVQqxa"
+    P38 = "5b9CQSmHSRwjyY9haI84rA"
+    P39 = "29Wztm9runyFIOik4LfVXW"
+    P310 = "6mj3mNH7bcsCFSd4tE2vmW"
 
     P41 = "0GMHKKpNzfwrfIRQagPKHv"
     P42 = "7fZTtl038X2mnFUTxa06BO"
     P43 = "2y306QxWv1D8skpMxhogtr"
     P44 = "7Gve87oAvrTLSxe62IlnPB"
     P45 = "1NwUJ3JFrmVNx5tTQoyld1"
+    P46 = "343Sa7FScLtCgb1esNrPY6"
+    P47 = "15UaUb2NAEEXBjarMOVBBj"
+    P48 = "7l2VYrWywwQS847QjNTl3E"
+    P49 = "30V3Qq6PAddNxXPIvxrP7P"
+    P410 = "0Dp1zVCoSElGGrbhZsocqb"
 
     playlist_ids = [NN, NN2, NN3, NN4, NN5, NN6, NN7, NN8, NN9, NN10]
-    playlist_ids2 = [P11, P12, P13, P14, P15, P21, P22, P23, P24, P25, P31, P32, P33, P34, P35, P41, P42, P43, P44, P45]
+    playlist_ids2 = [P11, P12, P13, P14, P15, P16, P17, P18, P19, P110,
+                    P21, P22, P23, P24, P25, P26, P27, P28, P29, P210,
+                    P31, P32, P33, P34, P35, P36, P37, P38, P39, P310,
+                    P41, P42, P43, P44, P45, P46, P47, P48, P49, P410]
     dfs = []
     for play_id in playlist_ids2:
         dfs.append(getfeat_df(play_id))
     
     song_df = pd.concat(dfs)
     
-    song_df.to_excel("Song_Feature_Data_set_2.xlsx") 
-    new_song_df = song_df[["name", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
-    new_song_df.to_excel("Song_Feature_Data_set_less_2.xlsx",index=False) 
+    file_name1 = "SongDataSet_4000.xlsx"
+    file_name2 = "SongDataSetLess_4000.xlsx"
+    file_name3 = "SongMinMax_4000.xlsx"
+
+    DATA_DIR = "DataSets"
+
+    file_name1 = os.path.join(DATA_DIR, file_name1)
+    file_name2 = os.path.join(DATA_DIR, file_name2)
+    file_name3 = os.path.join(DATA_DIR, file_name3)
+
+    song_df.to_excel(file_name1) 
+    new_song_df = song_df[["name", "artist","key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
+    new_song_df.to_excel(file_name2,index=False) 
 
     # Normalize features
     normfeat = ["key","loudness", "tempo"]
     normdf_minmax = new_song_df
     normdf_minmax = minmax_dfnorm(normdf_minmax, normfeat)
     
-    normdf_minmax.to_excel("Song_Feat_minmax_2000.xlsx",index=False) 
+    normdf_minmax.to_excel(file_name3,index=False) 
  
 
 
