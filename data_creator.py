@@ -9,12 +9,13 @@ from song_import import minmax_dfnorm
 # Creation of Energy Boost Songs
 
 dir_name = "DataSets"
+
 filename = "Song_Feature_Data_set_less.xlsx"  #input file
 filename = "test.xlsx"
 filename = os.path.join(dir_name, filename)
 df = pd.read_excel(filename)
 song_num = df.shape[0]
-
+dir_name = "TestSets"
 print("Songs in file {}: {}".format(filename, song_num) )
 y_list = [0] * pow(song_num, 2)
 y_df = pd.DataFrame(y_list, columns=["y"], dtype="int32")

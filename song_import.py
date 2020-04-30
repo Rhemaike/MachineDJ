@@ -218,20 +218,45 @@ if __name__ == "__main__":
     P49 = "30V3Qq6PAddNxXPIvxrP7P"
     P410 = "0Dp1zVCoSElGGrbhZsocqb"
 
+    T1 = "25o3QaP7TsE6oVpEpNXbiS"
+    T2 = "2vxkHrAfOjYFPOUu8zDVOS"
+    T3 = "6UKetNyN1Jihb5XzROpSX0"
+    T4 = "1ieD4bKwTnJBVzjqtR52WW"
+    T5 = "7w8ALECJYQWYCdvhsZ32ld"
+    T6 = "3MK5jNWfOZsJF8g1diJfiA"
+    T7 = "5xcr7ulWMefHitEvEIE6rY"
+    T8 = "0y28Z0z2GKZGoQ15tEJWGi"
+    T9 = "1HiCZa1XOMHg4a3BuDS4ga"
+    T10 = "1GVXbD0Wgp8OXbcZTCVH3g"
+    T11 = "3n618x9eeMJYju0QDAqQff"
+    T12 = "5iQeBH8kzvg6T1AOPL6VlU"
+    T13 = "7ttRIJMhqkvfnQieSZFRyV"
+    T14 = "7wNdoi3sg6Y9ziFMOn7uQo"
+    T15 = "2bfgrtagHiRoBBT6xA701X"
+    T16 = "7Ih9Xx6VrDkG1opuKdRZn3"
+    T17 = "56mKPrUGL6RwLQ2GoEyVnM"
+    T18 = "3SzMrSo8NK1SMnv1mPy6Rx"
+    T19 = "5c0JRlRcrcVEqOr0aQkHod"
+    T20 = "2y306QxWv1D8skpMxhogtr"
+    
+
+
     playlist_ids = [NN, NN2, NN3, NN4, NN5, NN6, NN7, NN8, NN9, NN10]
     playlist_ids2 = [P11, P12, P13, P14, P15, P16, P17, P18, P19, P110,
                     P21, P22, P23, P24, P25, P26, P27, P28, P29, P210,
                     P31, P32, P33, P34, P35, P36, P37, P38, P39, P310,
                     P41, P42, P43, P44, P45, P46, P47, P48, P49, P410]
+    playlist_ids3 = [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10,
+                        T11,T12,T13,T14,T15,T16,T17,T18,T19,T20]
     dfs = []
     for play_id in playlist_ids2:
         dfs.append(getfeat_df(play_id))
     
     song_df = pd.concat(dfs)
     
-    file_name1 = "SongDataSet_4000.xlsx"
-    file_name2 = "SongDataSetLess_4000.xlsx"
-    file_name3 = "SongMinMax_4000.xlsx"
+    file_name1 = "TestSongDataSet.xlsx"
+    file_name2 = "TestSongDataSetLess.xlsx"
+    file_name3 = "TestSongMinMax.xlsx"
 
     DATA_DIR = "DataSets"
 
