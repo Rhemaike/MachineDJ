@@ -34,6 +34,7 @@ Our code was built in the anaconda python3 (in the base enviroment). The only mo
   - After that follow the prompts
   - Below shows an example usage:
   ```sh
+  (tf) C:\Users\roike\Documents\research\MachineDJ>python final_project_main.py
   2020-05-02 17:51:08.610787: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
 
   *****************************     Hola Querida! *****************************
@@ -56,8 +57,10 @@ Our code was built in the anaconda python3 (in the base enviroment). The only mo
   ... YAY!! Your Schedule has been recieved  ...
   The schedule you created was this: [{'activity': 3, 'duration': 0.5}, {'activity': 4, 'duration': 0.4}, {'activity': 1, 'duration': 0.2}, {'activity': 3, 'duration': 0.1}]
 ```
+  - To put in another schedule restart the program with Ctrl+C or by closing energy graph.
+
+### NOTES
   - We stored an excel sheet with songs and features we exrtracted using the spotify API. All songs on your generated playlist will be pulled from that data set
   - Enter your schedule in the format of activity number and duration of tme in hours.
   - After you have input the time the machine learning algorithm will generate the playlist for you in form of an ordered list of songs
   - A graph of the energy flow the algorithm is emultes will also be displayed
-  - To put in another schedule restart the program with Ctrl+C or closing energy graph.
