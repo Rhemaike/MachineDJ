@@ -219,15 +219,15 @@ schedule = schedule3
 
 ####################### Getting Schedule #############################
 print()
-print("******* Hola Querida! ***********")
+print("*****************************     Hola Querida! *****************************")
 print("Please input your schedule for the day. You have 4 activity options:")
 print("(1) BeastMode, (2) Studying, (3) Beach Party, (4) Relaxing")
 print()
 schedule = []
 while(True):
     activ_dic = {}
-    activity_in = input("What is your activty  choice [1, 2, 3, 4], type n if you are done: ")
-    if activity_in =="n":
+    activity_in = input("What is your activty  choice [1, 2, 3, 4], type q when done: ")
+    if activity_in =="q":
         print("... Exiting input stage")
         print("...We will start making your playlist")
         break
@@ -255,7 +255,7 @@ while(True):
 print("... YAY!! Your Schedule has been recieved  ...")
 time.sleep(2)
 if(len(schedule) == 0):
-    print("... Hmmmm, seems there is nothing in your schedule. Please try us again when you actually have something to do with your life")
+    print("... Hmmmm, seems like there is nothing in your schedule. Please try us again when you actually have something to do with your life")
     exit(3)
 else:
     print("The schedule you created was this:", schedule)
@@ -467,7 +467,7 @@ print("... Playlist is:")
 for track in playlist:
     name = track["name"]
     artist = track["artist"]
-    print(f"Song: {name}, Artist:{artist}")
+    print(f"... Song: {name}, Artist: {artist}")
 print()
 print("... The playlist energy graph has also been plotted!! ")
 
@@ -572,9 +572,9 @@ plt.show()
 
 
 ## Save Images
-IMAGE_DIR = "Images"
-file_name = "Shedule3.png"
-file_name = os.path.join(IMAGE_DIR, file_name)
-fig.savefig(file_name)
-fig_size
+# IMAGE_DIR = "Images"
+# file_name = "Shedule3.png"
+# file_name = os.path.join(IMAGE_DIR, file_name)
+# fig.savefig(file_name)
+# fig_size
 

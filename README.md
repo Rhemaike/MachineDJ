@@ -20,18 +20,42 @@ Our code base contains jupyter notebooks for training the four neuralnetworks us
  - scikit-learn
  - matplotlib
  
-You can pip instal this modules seperately e.g
+You can pip instal this modules seperately from the windows command prompt or a linux terminale.g
   ```sh
   $ pip install matplotlib
   ```
 Our code was built in the anaconda python3 (in the base enviroment). The only module that anaoconda did not have was tensorflow
  
 ### Running Code
-  - Run final_code_main.py
+  - Run final_code_main.py in the windows command prompt, max terminal or windows terminal
   ```sh
   $ python final_project_main.py
   ```
   - After that follow the prompts
+  - Below shows an example usage:
+  ```sh
+  2020-05-02 17:51:08.610787: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+
+  *****************************     Hola Querida! *****************************
+  Please input your schedule for the day. You have 4 activity options:
+  (1) BeastMode, (2) Studying, (3) Beach Party, (4) Relaxing
+
+  What is your activty  choice [1, 2, 3, 4], type q when done: 5
+  Please input an activity out of these options: 1, 2, 3, or 4
+  What is your activty  choice [1, 2, 3, 4], type q when done: 3
+  How long will you be doing this activity in hrs: .5
+  What is your activty  choice [1, 2, 3, 4], type q when done: 4
+  How long will you be doing this activity in hrs: .4
+  What is your activty  choice [1, 2, 3, 4], type q when done: 1
+  How long will you be doing this activity in hrs: .2
+  What is your activty  choice [1, 2, 3, 4], type q when done: 3
+  How long will you be doing this activity in hrs: .1
+  What is your activty  choice [1, 2, 3, 4], type q when done: q
+  ... Exiting input stage
+  ...We will start making your playlist
+  ... YAY!! Your Schedule has been recieved  ...
+  The schedule you created was this: [{'activity': 3, 'duration': 0.5}, {'activity': 4, 'duration': 0.4}, {'activity': 1, 'duration': 0.2}, {'activity': 3, 'duration': 0.1}]
+```
   - We stored an excel sheet with songs and features we exrtracted using the spotify API. All songs on your generated playlist will be pulled from that data set
   - Enter your schedule in the format of activity number and duration of tme in hours.
   - After you have input the time the machine learning algorithm will generate the playlist for you in form of an ordered list of songs
