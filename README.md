@@ -20,14 +20,14 @@ Our code base contains jupyter notebooks for training the four neuralnetworks us
  - scikit-learn
  - matplotlib
  
-You can pip instal this modules seperately from the windows command prompt or a linux terminale.g
+You can pip instal this modules seperately from the windows command prompt or a linux terminal e.g
   ```sh
   $ pip install matplotlib
   ```
 Our code was built in the anaconda python3 (in the base enviroment). The only module that anaoconda did not have was tensorflow
  
 ### Running Code
-  - All the code is located in the folder named folder
+  - All the code is located in the folder named **code**
   - Run final_code_main.py in the windows command prompt, maC terminal or windows terminal
   - First go into the code directory
   ```sh
