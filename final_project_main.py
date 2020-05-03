@@ -414,6 +414,8 @@ for i in range(0, total_time-step_size, step_size):
         # Search through songs to find the one with the same key
         song_chosen = 0
         for song in song_lib[activity_to_check]:
+            if(song["name"] == playlist[-1]["name"]):  #Forcefully stops song repeats
+                continue
             present_song_key = playlist[-1]["key_no_norm"]
             present_song_mode = playlist[-1]["mode"]
             
@@ -498,12 +500,16 @@ for i,en in enumerate(energy_list):
 
 
 # Create figure and axes
-fig_size = (8,6)
-fnt_size = 14
-if(total_time > 100):
-    t = int(total_time/16)
-    fig_size = (t+(2),t)
-    fnt_size = int(total_time/15)
+if(len(playlist) < 30):
+    fig_size = (8,6)
+    fnt_size = 14
+else:
+    fig_size = (10,10)
+    fnt_size = 20
+# if(total_time > 100):
+#     t = int(total_time/16)
+#     fig_size = (t+(2),t)
+#     fnt_size = int(total_time/15)
 fig = plt.figure(figsize=fig_size)
 gs = gridspec.GridSpec(2,1, height_ratios=[3, 0.7]) 
 ax0 = plt.subplot(gs[0])
@@ -547,14 +553,15 @@ for i,song in enumerate(playlist):
     
     rect = mpatches.Rectangle((xp,yp), width, height, angle=0.0, color=color_dic[cam_key], alpha=a, linewidth=0)
     if i > 0:
-        ec= energy_list[i-1]
-        if ec == 1:
-            ax1.text(xp+ (width/2),(yp - height/4), "+", ha = "center", va='center',color = "blue",fontsize=fnt_size, fontweight='bold')
-        elif ec == 0:
-            ax1.text(xp+ (width/2),(yp - height/4), "-", ha = "center", va='center',color = "red",fontsize=fnt_size, fontweight='bold')
+        if len(playlist) < 40:
+            ec= energy_list[i-1]
+            if ec == 1:
+                ax1.text(xp+ (width/2),(yp - height/4), "+", ha = "center", va='center',color = "blue",fontsize=fnt_size, fontweight='bold')
+            elif ec == 0:
+                ax1.text(xp+ (width/2),(yp - height/4), "-", ha = "center", va='center',color = "red",fontsize=fnt_size, fontweight='bold')
         
-
-    ax1.text(xp+ (width/2),yp + (height/2), str(cam_key) + cam_mode, ha='center', va='center', fontsize=11, fontweight='bold', color="white")
+    if len(playlist) < 30:
+        ax1.text(xp + (width/2),yp + (height/2), str(cam_key) + cam_mode, ha='center', va='center', fontsize=11, fontweight='bold', color="white")
     xp = xp + width
     ax1.add_patch(rect)
 #     print(color_dic[cam_key])
