@@ -1,4 +1,4 @@
-# Schedule-based Harmonic Playlist Generation usingNeural Networks
+# Schedule-based Harmonic Playlist Generation using Neural Networks
 
 [![Build Status](https://github.com/Rhemaike/MachineDJ)](https://github.com/Rhemaike/MachineDJ)
 
