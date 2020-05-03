@@ -27,7 +27,13 @@ You can pip instal this modules seperately from the windows command prompt or a 
 Our code was built in the anaconda python3 (in the base enviroment). The only module that anaoconda did not have was tensorflow
  
 ### Running Code
-  - Run final_code_main.py in the windows command prompt, max terminal or windows terminal
+  - All the code is located in the folder named folder
+  - Run final_code_main.py in the windows command prompt, maC terminal or windows terminal
+  - First go into the code directory
+  ```sh
+  $ cd code
+  ```
+  - Then execute the python file
   ```sh
   $ python final_project_main.py
   ```
