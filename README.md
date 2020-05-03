@@ -1,8 +1,9 @@
 # Schedule-based Harmonic Playlist Generation using Neural Networks
 
+# RESEARCH PAPER AND PRESENTATION ARE AVAILABLE IN THE GIT.
 [![Build Status](https://github.com/Rhemaike/MachineDJ)](https://github.com/Rhemaike/MachineDJ)
 
-#Research Paper and Presentation are located in the Git
+
 
 We have build a software that allows users to create playlist for their entire day based on their schedule. This is a proof of concept so the amount of activities a user can have in their schedule is limited to 4:
 
