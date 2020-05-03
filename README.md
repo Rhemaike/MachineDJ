@@ -1,6 +1,6 @@
 # Schedule-based Harmonic Playlist Generation using Neural Networks
 
-# RESEARCH PAPER AND PRESENTATION ARE AVAILABLE IN THE GIT.
+# RESEARCH PAPER AND PRESENTATION ARE AVAILABLE IN THE GIT REPOSITORY
 [![Build Status](https://github.com/Rhemaike/MachineDJ)](https://github.com/Rhemaike/MachineDJ)
 
 
