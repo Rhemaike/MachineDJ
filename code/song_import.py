@@ -265,7 +265,7 @@ if __name__ == "__main__":
     file_name3 = os.path.join(DATA_DIR, file_name3)
 
     song_df.to_excel(file_name1) 
-    new_song_df = song_df[["name", "artist","key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
+    new_song_df = song_df[["name", "artist", "id", "key", "liveness", "instrumentalness", "loudness", "mode", "speechiness", "tempo", "valence", "danceability", "energy", "acousticness"]].copy()
     new_song_df.to_excel(file_name2,index=False) 
 
     # Normalize features

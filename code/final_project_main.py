@@ -17,6 +17,8 @@ import numpy as np
 import tensorflow as tf
 import math
 import time
+import spotipy
+import spotipy.util as util
 
 # plotting imports
 import matplotlib.path as mpath
@@ -41,7 +43,7 @@ def preproc_userdata(df):
     df.dropna(inplace=True)
     data = []
     for row in df.values:
-        data.append(np.array(row[2:], dtype=np.float64))
+        data.append(np.array(row[3:], dtype=np.float64))
         
     X_data = []
     
@@ -473,6 +475,33 @@ for track in playlist:
 print()
 print("... The playlist energy graph has also been plotted!! ")
 
+## Uploading Paylist
+
+## Add song to playlist on spotify
+username='rhemaike'
+scope = 'playlist-modify-public'
+token = util.prompt_for_user_token(username, scope)
+
+if token:
+    sp = spotipy.Spotify(auth=token)
+    name = "Test user creator playlist"
+    user_playlist = sp.user_playlist_create(username, name, public=True, description='')
+    playlist_id = user_playlist["id"]  # Get playlist ID 
+
+    # Make track list:
+    tracks = [" "] * len(playlist) # list of track URIs, URLs or IDs
+    for i, track in enumerate(playlist):
+        tracks[i] = track["id"]
+        # name = track["name"]
+        # artist = track["artist"]
+        # print(f"... Song: {name}, Artist: {artist}")
+
+    # Add track to playlist 
+    sp.user_playlist_add_tracks(username, playlist_id, tracks, position=None)
+    print(f"Playlist Uploaded to spotify under the name: {name}!!!")
+else:
+    print("Can't get token for", username)
+
 
 # #### STEP 6:  Plotting Data
 
@@ -572,6 +601,7 @@ plt.axis('equal')
 plt.axis('off')
 # plt.tight_layout()
 
+# Plot Graph
 plt.show()
 
 
@@ -584,4 +614,3 @@ plt.show()
 # file_name = os.path.join(IMAGE_DIR, file_name)
 # fig.savefig(file_name)
 # fig_size
-
